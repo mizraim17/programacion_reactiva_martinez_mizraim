@@ -12,23 +12,33 @@ import { EstudianteArrService } from '../../services/estudiante-arr.service';
   styleUrls: ['./tabla.component.scss'],
 })
 export class TablaComponent {
+  estudiantes!: Estudiante[];
 
-  estudiantes!: Estudiante[]
+  dataSource!: MatTableDataSource<Estudiante>;
+
+  addEstudiante() {
+    let c: Estudiante = {
+      nombre: 'mizraim ',
+      apellido: 'Rick',
+      curso: 'ANGULAR',
+      calificacion: 4.6,
+      correo: 'baby@gmail.com',
+      sexo: 'Masculino',
+      becado: true,
+    };
+
+    this.estudianteService.agregarEstudiante(c);
+  }
 
   constructor(
     private dialog: MatDialog,
-    private estudianteService: EstudianteArrService) {
+    private estudianteService: EstudianteArrService
+  ) {}
 
-    console.log("-->",estudianteService.obtenerCurso());
-    console.log("estudiantes-->",this.estudiantes );
-
+  ngOnInit(): void {
+    this.estudiantes = this.estudianteService.obtenerCurso();
+    this.dataSource = new MatTableDataSource<Estudiante>(this.estudiantes);
   }
-
-
-  dataSource: MatTableDataSource<Estudiante> =
-    new MatTableDataSource<Estudiante>(this.estudiantes);
-
-
 
   columnas: string[] = [
     'Nombre',
@@ -53,12 +63,10 @@ export class TablaComponent {
   eliminarDatos(i: number) {
     console.log('entro a eliminar', i);
 
-    let arr_copy = [...this.estudiantes];
+    let arr_copy = this.dataSource.data;
+
+    console.log('arr_copy', arr_copy);
 
     arr_copy.splice(i, 1);
-
-    this.estudiantes = arr_copy;
-
-    this.dataSource = new MatTableDataSource(this.estudiantes);
   }
 }

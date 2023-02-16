@@ -4,7 +4,7 @@
 
 <div mat-dialog-content>
 
-  <form [formGroup]="formulario " (ngSubmit)="login()" class="row g-3 mt-5">
+  <form [formGroup]="formulario " (ngSubmit)="editarEstudiante()" class="row g-3 mt-5">
     <div class="col-md-6">
       <label for="inputEmail4" class="form-label">Nombre</label>
       <input type="text" class="form-control" id="inputEmail4" formControlName="nombre">
@@ -100,5 +100,5 @@
 <div mat-dialog-actions>
 
   <button mat-button mat-dialog-close>Cerrar</button>
-  <button mat-button>editar</button>
+
 </div>

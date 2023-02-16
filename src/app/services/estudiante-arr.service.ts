@@ -1,14 +1,14 @@
 import { Injectable } from '@angular/core';
 import { Estudiante } from '../models/estudiante';
+import { DataSource } from '@angular/cdk/collections';
+import { MatTableDataSource } from '@angular/material/table';
 
 @Injectable({
-  providedIn: 'root'
+  providedIn: 'root',
 })
 export class EstudianteArrService {
-
-     private estudiantes: Estudiante [] = [
-
-     {
+  private estudiantes: Estudiante[] = [
+    {
       nombre: 'Baby ',
       apellido: 'Rick',
       curso: 'ANGULAR',
@@ -65,13 +65,19 @@ export class EstudianteArrService {
     },
   ];
 
-  constructor() {
+  constructor() {}
 
-
-
+  ngOnInit(): void {
+    this.dataSource = new MatTableDataSource<Estudiante>(this.estudiantes);
   }
 
-  obtenerCurso(): Estudiante[]{
-    return this.estudiantes
+  obtenerCurso(): Estudiante[] {
+    return this.estudiantes;
+  }
+
+  agregarEstudiante(estudiante: Estudiante) {
+    console.log('es', estudiante);
+
+    this.estudiantes.push(estudiante);
   }
 }

@@ -2,6 +2,9 @@ import { Dialog } from '@angular/cdk/dialog';
 import { Component, Inject } from '@angular/core';
 import { MatDialogRef, MAT_DIALOG_DATA } from '@angular/material/dialog';
 import { FormControl, FormGroup, Validators } from '@angular/forms';
+import { EstudianteArrService } from '../../services/estudiante-arr.service';
+import { Estudiante } from '../../models/estudiante';
+import { DataSource } from '@angular/cdk/collections';
 
 @Component({
   selector: 'app-editar-estudiante',
@@ -11,7 +14,21 @@ import { FormControl, FormGroup, Validators } from '@angular/forms';
 export class EditarEstudianteComponent {
   formulario: FormGroup;
 
+  private arr_1: Estudiante[] = [
+    {
+      nombre: 'Baby ',
+      apellido: 'Rick',
+      curso: 'ANGULAR',
+      calificacion: 4.6,
+      correo: 'baby@gmail.com',
+      sexo: 'Masculino',
+      becado: true,
+    },
+  ];
+
   constructor(
+    private estudianteService: EstudianteArrService,
+
     private dialogRef: MatDialogRef<EditarEstudianteComponent>,
     @Inject(MAT_DIALOG_DATA) public data: any
   ) {
@@ -37,8 +54,7 @@ export class EditarEstudianteComponent {
     this.formulario = new FormGroup(controles);
   }
 
-  login() {
-    // console.log(this.formularioRegistro);
-    console.log(this.formulario.controls['contrasena']);
+  editarEstudiante() {
+    // this.dataSource.data = arr_copy;
   }
 }
