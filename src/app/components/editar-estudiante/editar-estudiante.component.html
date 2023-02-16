@@ -1,0 +1,104 @@
+<div mat-dialog-title>
+  Editar estudiante {{data.becado}}
+</div>
+
+<div mat-dialog-content>
+
+  <form [formGroup]="formulario " (ngSubmit)="login()" class="row g-3 mt-5">
+    <div class="col-md-6">
+      <label for="inputEmail4" class="form-label">Nombre</label>
+      <input type="text" class="form-control" id="inputEmail4" formControlName="nombre">
+      <div class="valido" *ngIf="formulario.controls['nombre'].touched && formulario.controls['nombre'].valid ">
+        Es Válido
+      </div>
+      <div class="invalido"
+        *ngIf="formulario.controls['nombre'].errors?.['required'] && formulario.controls['nombre'].dirty ">
+        Está Vacío
+      </div>
+    </div>
+
+    <div class="col-md-6">
+      <label for="inputPassword4" class="form-label">Apellido</label>
+      <input formControlName="apellido" type="text" class="form-control" id="inputPassword4">
+      <div class="valido" *ngIf="  formulario.controls['apellido'].touched && formulario.controls['apellido'].valid ">
+        Es Válido
+      </div>
+      <div class="invalido"
+        *ngIf="formulario.controls['apellido'].errors?.['required'] && formulario.controls['apellido'].dirty ">
+        Está Vacío
+      </div>
+    </div>
+
+    <div class="col-md-6">
+      <label for="curso" class="form-label">Curso</label>
+      <input formControlName="curso" type="text" class="form-control" id="curso">
+      <div class="valido" *ngIf=" formulario.controls['curso'].touched && formulario.controls['curso'].valid ">
+        Es Válido
+      </div>
+      <div class="invalido"
+        *ngIf="formulario.controls['direccion'].errors?.['required'] && formulario.controls['direccion'].dirty ">
+        Está Vacío
+      </div>
+
+    </div>
+
+    <div class="col-md-6">
+
+      <label for="mail" class="form-label">Correo</label>
+      <input formControlName="correo" type="text" class="form-control" id="mail">
+      <div class="valido" *ngIf="formulario.controls['curso'].touched && formulario.controls['curso'].valid ">
+        Es Válido
+      </div>
+      <div class="invalido"
+        *ngIf="formulario.controls['direccion'].errors?.['required'] && formulario.controls['direccion'].dirty ">
+        Está Vacío
+      </div>
+    </div>
+
+    <div class="col-md-6">
+      <label for="password" class="form-label">Contraseña</label>
+      <input formControlName="contrasena" type="password" class="form-control" id="password">
+
+      <div class="valido" *ngIf="formulario.controls['contrasena'].valid && formulario.controls['contrasena'].touched">
+        Es Válido
+      </div>
+
+      <div class="invalido"
+        *ngIf="formulario.controls['contrasena'].errors?.['minlength'] && formulario.controls['contrasena'].dirty ">
+        Minimo son 4 caracteres
+      </div>
+
+      <div class="invalido"
+        *ngIf="formulario.controls['contrasena'].errors?.['required'] && formulario.controls['contrasena'].dirty  ">
+        Correo vacío
+      </div>
+
+      <div class="invalido"
+        *ngIf="formulario.controls['contrasena'].errors?.['pattern'] && formulario.controls['contrasena'].dirty  ">
+        Se requiere
+      </div>
+
+    </div>
+
+
+    <div class="col-12">
+      <div class="form-check">
+        <input formControlName="becado" class="form-check-input" type="checkbox" id="gridCheck">
+        <label class="form-check-label" for="gridCheck">
+          Beca
+        </label>
+      </div>
+    </div>
+    <div class="col-12">
+      <button type="submit" class="btn btn-primary">Registrar</button>
+    </div>
+  </form>
+
+
+</div>
+
+<div mat-dialog-actions>
+
+  <button mat-button mat-dialog-close>Cerrar</button>
+  <button mat-button>editar</button>
+</div>
