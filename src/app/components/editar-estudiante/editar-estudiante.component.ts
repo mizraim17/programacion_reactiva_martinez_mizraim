@@ -6,12 +6,16 @@ import { EstudianteArrService } from '../../services/estudiante-arr.service';
 import { Estudiante } from '../../models/estudiante';
 import { DataSource } from '@angular/cdk/collections';
 
+import { MatTableDataSource } from '@angular/material/table';
+
 @Component({
   selector: 'app-editar-estudiante',
   templateUrl: './editar-estudiante.component.html',
   styleUrls: ['./editar-estudiante.component.scss'],
 })
 export class EditarEstudianteComponent {
+  dataSource!: MatTableDataSource<Estudiante>;
+
   formulario: FormGroup;
 
   private arr_1: Estudiante[] = [
@@ -19,8 +23,8 @@ export class EditarEstudianteComponent {
       nombre: 'Baby ',
       apellido: 'Rick',
       curso: 'ANGULAR',
-      calificacion: 4.6,
       correo: 'baby@gmail.com',
+      calificacion: 4.6,
       sexo: 'Masculino',
       becado: true,
     },
@@ -42,19 +46,46 @@ export class EditarEstudianteComponent {
           '[a-zA-Z0-9_]+([.][a-zA-Z0-9_]+)*@[a-zA-Z0-9_]+([.][a-zA-Z0-9_]+)*[.][a-zA-Z]{2,5}'
         ),
       ]),
+      sexo: new FormControl(data.sexo, [Validators.required]),
       becado: new FormControl(data.becado, []),
-      contrasena: new FormControl('', [
-        Validators.required,
-        Validators.minLength(4),
-        Validators.pattern(
-          '(?=^.{8,}$)((?=.*d)|(?=.*W+))(?![.\n])(?=.*[A-Z])(?=.*[a-z]).*$"'
-        ),
-      ]),
     };
     this.formulario = new FormGroup(controles);
   }
 
-  editarEstudiante() {
-    // this.dataSource.data = arr_copy;
+  ngOnInit(): void {
+    this.dataSource = new MatTableDataSource<Estudiante>();
+    this.estudianteService
+      .obtenerEstudiantesObservable()
+      .subscribe((estudiantes: Estudiante[]) => {
+        this.dataSource.data = estudiantes;
+      });
+
+    console.log('this.dataSource.data', this.dataSource.data);
+  }
+
+  editarEstudiante(estu: any) {
+    console.log('data', this.data);
+    console.log('this.dataSource.data', this.dataSource.data[0]);
+
+    let arr_copy = this.dataSource.data;
+
+    arr_copy[0] = {
+      nombre: estu.nombre.value,
+      apellido: estu.apellido.value,
+      curso: estu.curso.value,
+      correo: estu.correo.value,
+      calificacion: 0,
+      sexo: estu.sexo.value,
+      becado: estu.becado.value,
+    };
+
+    // this.dataSource = new MatTableDataSource(this.estudiantes);
+
+    console.log('arr_copy-->', arr_copy);
+    // console.log('entro al formulario', this.formulario.value);
+
+    // arr_copy.push(this.formulario.value);
+
+    this.dataSource.data = arr_copy;
   }
 }

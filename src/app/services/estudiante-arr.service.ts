@@ -2,11 +2,14 @@ import { Injectable } from '@angular/core';
 import { Estudiante } from '../models/estudiante';
 import { DataSource } from '@angular/cdk/collections';
 import { MatTableDataSource } from '@angular/material/table';
+import { BehaviorSubject, Observable } from 'rxjs';
 
 @Injectable({
   providedIn: 'root',
 })
 export class EstudianteArrService {
+  private estudiante$!: BehaviorSubject<Estudiante[]>;
+
   private estudiantes: Estudiante[] = [
     {
       nombre: 'Baby ',
@@ -65,10 +68,20 @@ export class EstudianteArrService {
     },
   ];
 
-  constructor() {}
+  constructor() {
+    this.estudiante$ = new BehaviorSubject(this.estudiantes);
 
-  ngOnInit(): void {
-    this.dataSource = new MatTableDataSource<Estudiante>(this.estudiantes);
+    //   this.estudiante$() = new Observable<Estudiante[]>(
+    //   (subscriptor) => {
+    //     subscriptor.next(this.estudiantes);
+    //   }
+    // );
+  }
+
+  ngOnInit(): void {}
+
+  obtenerEstudiantesObservable(): Observable<Estudiante[]> {
+    return this.estudiante$.asObservable();
   }
 
   obtenerCurso(): Estudiante[] {
@@ -76,8 +89,7 @@ export class EstudianteArrService {
   }
 
   agregarEstudiante(estudiante: Estudiante) {
-    console.log('es', estudiante);
-
     this.estudiantes.push(estudiante);
+    this.estudiante$.next(this.estudiantes);
   }
 }

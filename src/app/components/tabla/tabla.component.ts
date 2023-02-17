@@ -12,8 +12,6 @@ import { EstudianteArrService } from '../../services/estudiante-arr.service';
   styleUrls: ['./tabla.component.scss'],
 })
 export class TablaComponent {
-  estudiantes!: Estudiante[];
-
   dataSource!: MatTableDataSource<Estudiante>;
 
   addEstudiante() {
@@ -36,8 +34,12 @@ export class TablaComponent {
   ) {}
 
   ngOnInit(): void {
-    this.estudiantes = this.estudianteService.obtenerCurso();
-    this.dataSource = new MatTableDataSource<Estudiante>(this.estudiantes);
+    this.dataSource = new MatTableDataSource<Estudiante>();
+    this.estudianteService
+      .obtenerEstudiantesObservable()
+      .subscribe((estudiantes: Estudiante[]) => {
+        this.dataSource.data = estudiantes;
+      });
   }
 
   columnas: string[] = [
@@ -61,12 +63,10 @@ export class TablaComponent {
   }
 
   eliminarDatos(i: number) {
-    console.log('entro a eliminar', i);
-
     let arr_copy = this.dataSource.data;
 
-    console.log('arr_copy', arr_copy);
-
     arr_copy.splice(i, 1);
+
+    this.dataSource.data = arr_copy;
   }
 }
