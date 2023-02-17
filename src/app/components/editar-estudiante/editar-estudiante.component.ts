@@ -47,45 +47,26 @@ export class EditarEstudianteComponent {
         ),
       ]),
       sexo: new FormControl(data.sexo, [Validators.required]),
+      calificacion: new FormControl(data.calificacion, [Validators.required]),
       becado: new FormControl(data.becado, []),
     };
     this.formulario = new FormGroup(controles);
   }
 
+
   ngOnInit(): void {
-    this.dataSource = new MatTableDataSource<Estudiante>();
+   this.dataSource = new MatTableDataSource<Estudiante>();
     this.estudianteService
       .obtenerEstudiantesObservable()
       .subscribe((estudiantes: Estudiante[]) => {
         this.dataSource.data = estudiantes;
       });
 
-    console.log('this.dataSource.data', this.dataSource.data);
+    // console.log('this.dataSource.data', this.dataSource.data);
   }
 
-  editarEstudiante(estu: any) {
-    console.log('data', this.data);
-    console.log('this.dataSource.data', this.dataSource.data[0]);
-
-    let arr_copy = this.dataSource.data;
-
-    arr_copy[0] = {
-      nombre: estu.nombre.value,
-      apellido: estu.apellido.value,
-      curso: estu.curso.value,
-      correo: estu.correo.value,
-      calificacion: 0,
-      sexo: estu.sexo.value,
-      becado: estu.becado.value,
-    };
-
-    // this.dataSource = new MatTableDataSource(this.estudiantes);
-
-    console.log('arr_copy-->', arr_copy);
-    // console.log('entro al formulario', this.formulario.value);
-
-    // arr_copy.push(this.formulario.value);
-
-    this.dataSource.data = arr_copy;
+  editEtudiante(estu:any){
+    this.estudianteService.editarEstudiante(estu)
   }
+
 }

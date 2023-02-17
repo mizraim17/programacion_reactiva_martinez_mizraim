@@ -4,7 +4,7 @@
 
 <div mat-dialog-content>
 
-  <form [formGroup]="formulario " (ngSubmit)="editarEstudiante(formulario.controls)" class="row g-3 mt-5">
+  <form [formGroup]="formulario " (ngSubmit)="editEtudiante(formulario.controls)" class="row g-3 mt-5">
     <div class="col-md-6">
       <label for="nombre" class="form-label">Nombre</label>
       <input type="text" class="form-control" id="nombre" formControlName="nombre">
@@ -57,7 +57,19 @@
       </div>
     </div>
 
+    <div class="col-md-6">
+      <label for="calificacion" class="form-label">calificacion</label>
+      <input formControlName="calificacion" type="text" class="form-control" id="calificacion">
+      <div class="valido"
+        *ngIf=" formulario.controls['calificacion'].touched && formulario.controls['calificacion'].valid ">
+        Es Válido
+      </div>
+      <div class="invalido"
+        *ngIf="formulario.controls['calificacion'].errors?.['required'] && formulario.controls['calificacion'].dirty ">
+        Está Vacío
+      </div>
 
+    </div>
 
 
     <div class="col-md-6">

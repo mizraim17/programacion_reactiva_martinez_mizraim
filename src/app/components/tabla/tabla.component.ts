@@ -44,6 +44,7 @@ export class TablaComponent {
 
   columnas: string[] = [
     'Nombre',
+   
     'Curso',
     'Calificacion',
     'Aprobado',
