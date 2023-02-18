@@ -1,54 +1,39 @@
-import { Dialog } from '@angular/cdk/dialog';
 import { Component, Inject } from '@angular/core';
 import { MatDialogRef, MAT_DIALOG_DATA } from '@angular/material/dialog';
 import { FormControl, FormGroup, Validators } from '@angular/forms';
 import { EstudianteArrService } from '../../services/estudiante-arr.service';
 import { Estudiante } from '../../models/estudiante';
-import { DataSource } from '@angular/cdk/collections';
-
 import { MatTableDataSource } from '@angular/material/table';
 
 @Component({
-  selector: 'app-editar-estudiante',
-  templateUrl: './editar-estudiante.component.html',
-  styleUrls: ['./editar-estudiante.component.scss'],
+  selector: 'app-agregar-estudiante',
+  templateUrl: './agregar-estudiante.component.html',
+  styleUrls: ['./agregar-estudiante.component.scss'],
 })
-export class EditarEstudianteComponent {
+export class AgregarEstudianteComponent {
   dataSource!: MatTableDataSource<Estudiante>;
 
   formulario: FormGroup;
 
-  private arr_1: Estudiante[] = [
-    {
-      nombre: 'Baby ',
-      apellido: 'Rick',
-      curso: 'ANGULAR',
-      correo: 'baby@gmail.com',
-      calificacion: 4.6,
-      sexo: 'Masculino',
-      becado: true,
-    },
-  ];
-
   constructor(
     private estudianteService: EstudianteArrService,
 
-    private dialogRef: MatDialogRef<EditarEstudianteComponent>,
+    private dialogRef: MatDialogRef<AgregarEstudianteComponent>,
     @Inject(MAT_DIALOG_DATA) public data: any
   ) {
     let controles: any = {
-      nombre: new FormControl(data.nombre, [Validators.required]),
-      apellido: new FormControl(data.apellido, [Validators.required]),
-      curso: new FormControl(data.curso, [Validators.required]),
-      correo: new FormControl(data.correo, [
+      nombre: new FormControl('', [Validators.required]),
+      apellido: new FormControl('', [Validators.required]),
+      curso: new FormControl('', [Validators.required]),
+      correo: new FormControl('', [
         Validators.required,
         Validators.pattern(
           '[a-zA-Z0-9_]+([.][a-zA-Z0-9_]+)*@[a-zA-Z0-9_]+([.][a-zA-Z0-9_]+)*[.][a-zA-Z]{2,5}'
         ),
       ]),
-      sexo: new FormControl(data.sexo, [Validators.required]),
-      calificacion: new FormControl(data.calificacion, [Validators.required]),
-      becado: new FormControl(data.becado, []),
+      sexo: new FormControl('', [Validators.required]),
+      calificacion: new FormControl('', [Validators.required]),
+      becado: new FormControl('', []),
     };
     this.formulario = new FormGroup(controles);
   }
@@ -64,9 +49,8 @@ export class EditarEstudianteComponent {
     // console.log('this.dataSource.data', this.dataSource.data);
   }
 
-  editEstudiante(estu: any, data: Estudiante) {
-    console.log('estu value', estu.value);
-
-    this.estudianteService.editarEstudiante(estu.value, data);
+  addEstudiante(form: any) {
+    console.log('form', form);
+    this.estudianteService.agregarEstudiante(form.value);
   }
 }

@@ -9,11 +9,14 @@ import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { MaterialModule } from './material.module';
 import { TablaComponent } from './components/tabla/tabla.component';
 import { EditarEstudianteComponent } from './components/editar-estudiante/editar-estudiante.component';
+import { AgregarEstudianteComponent } from './components/agregar-estudiante/agregar-estudiante.component';
+import { ConcatNombreApellidoPipe } from './pipes/concat-nombre-apellido.pipe';
 
 import { ReactiveFormsModule } from '@angular/forms';
-import { FontSizePipe } from './pipes/font-size.pipe';
+
 import { FontSizeDirective } from './directives/font-size.directive';
 import { EstudianteArrService } from './services/estudiante-arr.service';
+import { ValidaCalificacionPipe } from './pipes/valida-calificacion.pipe';
 
 @NgModule({
   declarations: [
@@ -23,8 +26,10 @@ import { EstudianteArrService } from './services/estudiante-arr.service';
     ContentComponent,
     TablaComponent,
     EditarEstudianteComponent,
-    FontSizePipe,
+    AgregarEstudianteComponent,
     FontSizeDirective,
+    ConcatNombreApellidoPipe,
+    ValidaCalificacionPipe,
   ],
   imports: [
     BrowserModule,
@@ -32,9 +37,7 @@ import { EstudianteArrService } from './services/estudiante-arr.service';
     MaterialModule,
     ReactiveFormsModule,
   ],
-  providers: [
-    EstudianteArrService
-  ],
+  providers: [EstudianteArrService],
   bootstrap: [AppComponent],
 })
 export class AppModule {}

@@ -5,6 +5,7 @@ import { Estudiante } from '../../models/estudiante';
 import { MatDialog } from '@angular/material/dialog';
 import { EditarEstudianteComponent } from '../editar-estudiante/editar-estudiante.component';
 import { EstudianteArrService } from '../../services/estudiante-arr.service';
+import { AgregarEstudianteComponent } from '../agregar-estudiante/agregar-estudiante.component';
 
 @Component({
   selector: 'app-tabla',
@@ -14,19 +15,19 @@ import { EstudianteArrService } from '../../services/estudiante-arr.service';
 export class TablaComponent {
   dataSource!: MatTableDataSource<Estudiante>;
 
-  addEstudiante() {
-    let c: Estudiante = {
-      nombre: 'mizraim ',
-      apellido: 'Rick',
-      curso: 'ANGULAR',
-      calificacion: 4.6,
-      correo: 'baby@gmail.com',
-      sexo: 'Masculino',
-      becado: true,
-    };
+  // addEstudiante() {
+  //   let c: Estudiante = {
+  //     nombre: 'mizraim ',
+  //     apellido: 'Rick',
+  //     curso: 'ANGULAR',
+  //     calificacion: 4.6,
+  //     correo: 'baby@gmail.com',
+  //     sexo: 'Masculino',
+  //     becado: true,
+  //   };
 
-    this.estudianteService.agregarEstudiante(c);
-  }
+  //   this.estudianteService.agregarEstudiante(c);
+  // }
 
   constructor(
     private dialog: MatDialog,
@@ -44,7 +45,7 @@ export class TablaComponent {
 
   columnas: string[] = [
     'Nombre',
-   
+
     'Curso',
     'Calificacion',
     'Aprobado',
@@ -61,6 +62,10 @@ export class TablaComponent {
     const dialogRef = this.dialog.open(EditarEstudianteComponent, {
       data: estudiante,
     });
+  }
+
+  addEstudiante() {
+    const dialogRef = this.dialog.open(AgregarEstudianteComponent, {});
   }
 
   eliminarDatos(i: number) {
