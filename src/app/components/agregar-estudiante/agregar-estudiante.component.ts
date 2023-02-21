@@ -4,6 +4,7 @@ import { FormControl, FormGroup, Validators } from '@angular/forms';
 import { EstudianteArrService } from '../../services/estudiante-arr.service';
 import { Estudiante } from '../../models/estudiante';
 import { MatTableDataSource } from '@angular/material/table';
+import { Subscription } from 'rxjs';
 
 @Component({
   selector: 'app-agregar-estudiante',
@@ -12,8 +13,8 @@ import { MatTableDataSource } from '@angular/material/table';
 })
 export class AgregarEstudianteComponent {
   dataSource!: MatTableDataSource<Estudiante>;
-
   formulario: FormGroup;
+  suscripcion!: Subscription;
 
   constructor(
     private estudianteService: EstudianteArrService,
@@ -40,13 +41,15 @@ export class AgregarEstudianteComponent {
 
   ngOnInit(): void {
     this.dataSource = new MatTableDataSource<Estudiante>();
-    this.estudianteService
+    this.suscripcion = this.estudianteService
       .obtenerEstudiantesObservable()
       .subscribe((estudiantes: Estudiante[]) => {
         this.dataSource.data = estudiantes;
       });
+  }
 
-    // console.log('this.dataSource.data', this.dataSource.data);
+  ngOnDestroy(): void {
+    this.suscripcion.unsubscribe();
   }
 
   addEstudiante(form: any) {

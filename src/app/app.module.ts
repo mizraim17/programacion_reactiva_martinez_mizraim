@@ -17,6 +17,7 @@ import { ReactiveFormsModule } from '@angular/forms';
 import { FontSizeDirective } from './directives/font-size.directive';
 import { EstudianteArrService } from './services/estudiante-arr.service';
 import { ValidaCalificacionPipe } from './pipes/valida-calificacion.pipe';
+import { ListaComponent } from './components/lista/lista.component';
 
 @NgModule({
   declarations: [
@@ -30,6 +31,7 @@ import { ValidaCalificacionPipe } from './pipes/valida-calificacion.pipe';
     FontSizeDirective,
     ConcatNombreApellidoPipe,
     ValidaCalificacionPipe,
+    ListaComponent,
   ],
   imports: [
     BrowserModule,

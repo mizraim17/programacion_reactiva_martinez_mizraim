@@ -1,4 +1,10 @@
-import { Component, ViewChild, AfterViewInit } from '@angular/core';
+import {
+  Component,
+  ViewChild,
+  AfterViewInit,
+  OnInit,
+  OnDestroy,
+} from '@angular/core';
 import { MatTableDataSource } from '@angular/material/table';
 import { MatPaginator } from '@angular/material/paginator';
 import { Estudiante } from '../../models/estudiante';
@@ -6,28 +12,24 @@ import { MatDialog } from '@angular/material/dialog';
 import { EditarEstudianteComponent } from '../editar-estudiante/editar-estudiante.component';
 import { EstudianteArrService } from '../../services/estudiante-arr.service';
 import { AgregarEstudianteComponent } from '../agregar-estudiante/agregar-estudiante.component';
+import { Subscription } from 'rxjs';
 
 @Component({
   selector: 'app-tabla',
   templateUrl: './tabla.component.html',
   styleUrls: ['./tabla.component.scss'],
 })
-export class TablaComponent {
+export class TablaComponent implements OnInit, OnDestroy {
   dataSource!: MatTableDataSource<Estudiante>;
+  suscripcion!: Subscription;
 
-  // addEstudiante() {
-  //   let c: Estudiante = {
-  //     nombre: 'mizraim ',
-  //     apellido: 'Rick',
-  //     curso: 'ANGULAR',
-  //     calificacion: 4.6,
-  //     correo: 'baby@gmail.com',
-  //     sexo: 'Masculino',
-  //     becado: true,
-  //   };
-
-  //   this.estudianteService.agregarEstudiante(c);
-  // }
+  columnas: string[] = [
+    'Nombre',
+    'Curso',
+    'Calificacion',
+    'Aprobado',
+    'Acciones',
+  ];
 
   constructor(
     private dialog: MatDialog,
@@ -36,21 +38,16 @@ export class TablaComponent {
 
   ngOnInit(): void {
     this.dataSource = new MatTableDataSource<Estudiante>();
-    this.estudianteService
+    this.suscripcion = this.estudianteService
       .obtenerEstudiantesObservable()
       .subscribe((estudiantes: Estudiante[]) => {
         this.dataSource.data = estudiantes;
       });
   }
 
-  columnas: string[] = [
-    'Nombre',
-
-    'Curso',
-    'Calificacion',
-    'Aprobado',
-    'Acciones',
-  ];
+  ngOnDestroy(): void {
+    this.suscripcion.unsubscribe();
+  }
 
   @ViewChild(MatPaginator) paginator!: MatPaginator;
 

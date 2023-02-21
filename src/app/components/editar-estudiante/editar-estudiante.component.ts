@@ -7,6 +7,7 @@ import { Estudiante } from '../../models/estudiante';
 import { DataSource } from '@angular/cdk/collections';
 
 import { MatTableDataSource } from '@angular/material/table';
+import { Subscription } from 'rxjs';
 
 @Component({
   selector: 'app-editar-estudiante',
@@ -15,7 +16,7 @@ import { MatTableDataSource } from '@angular/material/table';
 })
 export class EditarEstudianteComponent {
   dataSource!: MatTableDataSource<Estudiante>;
-
+  suscripcion!: Subscription;
   formulario: FormGroup;
 
   private arr_1: Estudiante[] = [
@@ -55,7 +56,7 @@ export class EditarEstudianteComponent {
 
   ngOnInit(): void {
     this.dataSource = new MatTableDataSource<Estudiante>();
-    this.estudianteService
+    this.suscripcion = this.estudianteService
       .obtenerEstudiantesObservable()
       .subscribe((estudiantes: Estudiante[]) => {
         this.dataSource.data = estudiantes;
