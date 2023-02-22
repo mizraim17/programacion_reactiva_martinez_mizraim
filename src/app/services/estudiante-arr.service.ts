@@ -12,13 +12,14 @@ export class EstudianteArrService {
 
   private estudiantes: Estudiante[] = [
     {
-      nombre: 'Baby ',
+      nombre: 'Johnny Depp ',
       apellido: 'Rick',
       curso: 'ANGULAR',
-      correo: 'baby@gmail.com',
+      correo: 'johnny_depp@gmail.com',
       calificacion: 6,
       sexo: 'Masculino',
       becado: false,
+      foto: 'https://rickandmortyapi.com/api/character/avatar/183.jpeg',
     },
     {
       nombre: 'Amy',
@@ -28,6 +29,40 @@ export class EstudianteArrService {
       calificacion: 8.6,
       sexo: 'femenino',
       becado: true,
+
+      foto: 'https://rickandmortyapi.com/api/character/avatar/247.jpeg',
+    },
+
+    {
+      nombre: 'Snake  ',
+      apellido: 'Reporter',
+      curso: 'NODE ',
+      correo: 'snake_reporter@gmail.com',
+      calificacion: 5.9,
+      sexo: 'masculino',
+      becado: false,
+      foto: 'https://rickandmortyapi.com/api/character/avatar/589.jpeg',
+    },
+    {
+      nombre: 'Aqua  ',
+      apellido: ' Morty',
+      curso: 'NODE ',
+      correo: 'aqua_norty@gmail.com',
+      calificacion: 8.6,
+      sexo: 'masculino',
+      becado: true,
+
+      foto: 'https://rickandmortyapi.com/api/character/avatar/21.jpeg',
+    },
+    {
+      nombre: 'Stan Lee  ',
+      apellido: 'Rick',
+      curso: 'NODE ',
+      correo: 'stanlee_rick@gmail.com',
+      calificacion: 1.9,
+      sexo: 'masculino',
+      becado: false,
+      foto: 'https://rickandmortyapi.com/api/character/avatar/810.jpeg',
     },
     {
       nombre: 'Karen ',
@@ -37,33 +72,8 @@ export class EstudianteArrService {
       calificacion: 7.7,
       sexo: 'femenino',
       becado: true,
-    },
-    {
-      nombre: 'Bearded ',
-      apellido: 'Lady',
-      curso: 'NODE ',
-      correo: 'bearded@gmail.com',
-      calificacion: 5.9,
-      sexo: 'femenino',
-      becado: false,
-    },
-    {
-      nombre: 'Michael ',
-      apellido: 'Jackson',
-      curso: 'NODE ',
-      correo: 'bearded@gmail.com',
-      calificacion: 8.6,
-      sexo: 'masculino',
-      becado: true,
-    },
-    {
-      nombre: 'Evil ',
-      apellido: 'Morty',
-      curso: 'NODE ',
-      correo: 'bearded@gmail.com',
-      calificacion: 1.9,
-      sexo: 'masculino',
-      becado: false,
+
+      foto: 'https://rickandmortyapi.com/api/character/avatar/188.jpeg',
     },
   ];
 
@@ -101,6 +111,7 @@ export class EstudianteArrService {
           calificacion: estu.calificacion,
           sexo: estu.sexo,
           becado: estu.becado,
+          foto: estu.foto,
         };
       }
     });

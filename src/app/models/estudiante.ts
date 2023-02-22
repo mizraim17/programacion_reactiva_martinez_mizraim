@@ -6,4 +6,5 @@ export interface Estudiante {
   calificacion: number;
   sexo: string;
   becado: boolean;
+  foto: string;
 }

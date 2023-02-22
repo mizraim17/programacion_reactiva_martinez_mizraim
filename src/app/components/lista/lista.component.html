@@ -6,7 +6,7 @@
           <mat-card-title>{{ estudiante | concatNombreApellido }}</mat-card-title>
           <mat-card-subtitle>{{ estudiante.curso }}</mat-card-subtitle>
         </mat-card-header>
-        <img class="card-imagen" mat-card-image src="https://parentesis.com/imagesPosts/coder00.jpg" alt="">
+        <img class="card-imagen" mat-card-image src={{estudiante.foto}} alt="">
         <mat-card-content>
 
           <p>{{ estudiante.correo }}</p>

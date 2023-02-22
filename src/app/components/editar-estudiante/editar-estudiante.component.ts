@@ -28,6 +28,7 @@ export class EditarEstudianteComponent {
       calificacion: 4.6,
       sexo: 'Masculino',
       becado: true,
+      foto: 'https://rickandmortyapi.com/api/character/avatar/741.jpeg',
     },
   ];
 
