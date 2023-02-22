@@ -67,9 +67,7 @@ export class TablaComponent implements OnInit, OnDestroy {
 
   eliminarDatos(i: number) {
     let arr_copy = this.dataSource.data;
-
     arr_copy.splice(i, 1);
-
     this.dataSource.data = arr_copy;
   }
 }

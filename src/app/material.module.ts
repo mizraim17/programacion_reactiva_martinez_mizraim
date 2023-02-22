@@ -6,6 +6,8 @@ import { MatIconModule } from '@angular/material/icon';
 import { MatPaginatorModule } from '@angular/material/paginator';
 import { MatButtonModule } from '@angular/material/button';
 import { MatDialogModule } from '@angular/material/dialog';
+import { MatFormFieldModule } from '@angular/material/form-field';
+import { MatInputModule } from '@angular/material/input';
 
 import { MatCardModule } from '@angular/material/card';
 
@@ -19,6 +21,8 @@ import { MatCardModule } from '@angular/material/card';
     MatButtonModule,
     MatDialogModule,
     MatCardModule,
+    MatFormFieldModule,
+    MatInputModule,
   ],
 
   exports: [
@@ -30,6 +34,8 @@ import { MatCardModule } from '@angular/material/card';
     MatButtonModule,
     MatDialogModule,
     MatCardModule,
+    MatFormFieldModule,
+    MatInputModule,
   ],
 })
 export class MaterialModule {}

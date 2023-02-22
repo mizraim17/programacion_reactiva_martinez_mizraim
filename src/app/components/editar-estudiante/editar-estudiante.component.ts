@@ -48,9 +48,10 @@ export class EditarEstudianteComponent {
           '[a-zA-Z0-9_]+([.][a-zA-Z0-9_]+)*@[a-zA-Z0-9_]+([.][a-zA-Z0-9_]+)*[.][a-zA-Z]{2,5}'
         ),
       ]),
-      sexo: new FormControl(data.sexo, [Validators.required]),
       calificacion: new FormControl(data.calificacion, [Validators.required]),
+      sexo: new FormControl(data.sexo, [Validators.required]),
       becado: new FormControl(data.becado, []),
+      foto: new FormControl(data.foto, [Validators.required]),
     };
     this.formulario = new FormGroup(controles);
   }
@@ -62,12 +63,11 @@ export class EditarEstudianteComponent {
       .subscribe((estudiantes: Estudiante[]) => {
         this.dataSource.data = estudiantes;
       });
-
-    // console.log('this.dataSource.data', this.dataSource.data);
   }
 
   editEstudiante(estu: any, data: Estudiante) {
     console.log('estu value', estu.value);
+    console.log('estu data', data);
 
     this.estudianteService.editarEstudiante(estu.value, data);
   }

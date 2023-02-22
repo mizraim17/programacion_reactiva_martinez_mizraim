@@ -12,8 +12,8 @@ export class EstudianteArrService {
 
   private estudiantes: Estudiante[] = [
     {
-      nombre: 'Johnny Depp ',
-      apellido: 'Rick',
+      nombre: 'Johnny  ',
+      apellido: 'Depp',
       curso: 'ANGULAR',
       correo: 'johnny_depp@gmail.com',
       calificacion: 6,
@@ -98,12 +98,12 @@ export class EstudianteArrService {
 
     let arr_copy = this.estudiantes;
 
-    arr_copy.forEach(function (currentValue, index, arr) {
-      if (arr_copy[index] == data) {
-        console.log('arr_copy[index]', arr_copy[index]);
-        console.log('estu', estu);
+    arr_copy.map((elem, i) => {
+      if (arr_copy[i] == data) {
+        // console.log('arr_copy[index]', arr_copy[i]);
+        console.log('element', estu.foto);
 
-        arr_copy[index] = {
+        arr_copy[i] = {
           nombre: estu.nombre,
           apellido: estu.apellido,
           curso: estu.curso,
@@ -116,9 +116,21 @@ export class EstudianteArrService {
       }
     });
 
-    console.log('arr_copy finmal', arr_copy);
-
     this.estudiantes = arr_copy;
+    this.estudiante$.next(this.estudiantes);
+  }
+
+  eliminarEstudiante(i: number) {
+    this.estudiantes.splice(i, 1);
+    this.estudiante$.next(this.estudiantes);
+  }
+
+  filtrarEstudiante(word: string) {
+    let result = this.estudiantes.filter((ele) => {
+      return ele.nombre.toLocaleLowerCase().includes(word.toLocaleLowerCase());
+    });
+
+    this.estudiantes = result;
     this.estudiante$.next(this.estudiantes);
   }
 }

@@ -1,21 +1,31 @@
 <div class="container">
   <div class="row">
-    <div class="col-md-3" *ngFor="let estudiante of estudiantes$ | async">
+
+
+    <div class="row">
+
+      <mat-form-field class="example-full-width">
+        <mat-label>Favorite food</mat-label>
+        <input type="text" matInput (keyup)="filtrar($event)">
+      </mat-form-field>
+    </div>
+
+    <div class="col-12 col-sm-6 col-md-4 " *ngFor="let i=index,let estudiante of estudiantes$ | async">
       <mat-card>
         <mat-card-header>
           <mat-card-title>{{ estudiante | concatNombreApellido }}</mat-card-title>
           <mat-card-subtitle>{{ estudiante.curso }}</mat-card-subtitle>
         </mat-card-header>
-        <img class="card-imagen" mat-card-image src={{estudiante.foto}} alt="">
+        <img class="card-imagen" mat-card-image src="{{estudiante.foto}}" alt="">
         <mat-card-content>
 
-          <p>{{ estudiante.correo }}</p>
+          <p class="text-truncate">{{ estudiante.correo }}</p>
         </mat-card-content>
         <mat-card-actions align="end">
-          <button mat-raised-button color="primary">
+          <button mat-raised-button color="primary" (click)="editarDatos(estudiante)">
             Editar
           </button>
-          <button mat-button color="warn">
+          <button mat-button color="warn" (click)="eliminarDatos(i)">
             Eliminar
           </button>
         </mat-card-actions>
