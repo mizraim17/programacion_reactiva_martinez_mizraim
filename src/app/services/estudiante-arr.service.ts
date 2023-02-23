@@ -126,11 +126,24 @@ export class EstudianteArrService {
   }
 
   filtrarEstudiante(word: string) {
-    let result = this.estudiantes.filter((ele) => {
-      return ele.nombre.toLocaleLowerCase().includes(word.toLocaleLowerCase());
-    });
+    let result;
+    const array_copy = this.estudiantes;
 
-    this.estudiantes = result;
+    console.log('entro a array_copy', array_copy);
+
+    if (word == '') {
+      console.log('entro a vacio', array_copy);
+
+      this.estudiantes = array_copy;
+    } else {
+      result = this.estudiantes.filter((ele) => {
+        return ele.nombre
+          .toLocaleLowerCase()
+          .includes(word.toLocaleLowerCase());
+      });
+      this.estudiantes = result;
+    }
+
     this.estudiante$.next(this.estudiantes);
   }
 }
